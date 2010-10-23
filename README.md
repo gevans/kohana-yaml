@@ -2,7 +2,7 @@
 
 ## Requirements & Installation
 
-1. Install YAML PECL extension: http://pecl.php.net/package/yaml
+1. Install YAML PECL extension: [http://pecl.php.net/package/yaml](http://pecl.php.net/package/yaml)
 2. Download or clone this repository to your Kohana modules directory
 3. Enable the module in your `bootstrap.php` file
 4. Attach the YAML reader:
@@ -30,5 +30,8 @@ Kohana::$config->attach(Config_YAML);
 ## Example Usage
 
 	Kohana::config('example.another_key.bars.1');		// => "bar2"
+
+or access to config as object:
+
 	Kohana::config('example')->another_key['bars'][1];	// => "bar2"
 
