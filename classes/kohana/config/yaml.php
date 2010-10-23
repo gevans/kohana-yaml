@@ -29,7 +29,7 @@ class Kohana_Config_Yaml extends Kohana_Config_Reader {
 	 */
 	public function load($group, array $config = NULL)
 	{
-		if ($files = Kohana::find_file($this->_directory, $group, NULL, TRUE))
+		if ($files = Kohana::find_file($this->_directory, $group, 'yaml', TRUE))
 		{
 			// Initialize the config array
 			$config = array();
