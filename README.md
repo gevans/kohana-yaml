@@ -7,7 +7,9 @@
 3. Enable the module in your `bootstrap.php` file
 4. Attach the YAML reader:
 
-	Kohana::$config->attach(Config_YAML);
+<pre>
+Kohana::$config->attach(Config_YAML);
+</pre>
 
 ## Example YAML file
 
