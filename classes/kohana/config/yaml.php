@@ -1,6 +1,11 @@
 <?php defined('SYSPATH') or die('No direct script access.');
-
-class Kohana_Config_Yaml extends Kohana_Config_Reader {
+/**
+ * YAML configuration file reader.
+ * @package   Kohana/YAML
+ * @category  Configuration
+ * @author    Jan Stránský <jan.stransky@arnal.cz>
+ */
+class Kohana_Config_YAML extends Kohana_Config_Reader {
 
 	// Configuration group name
 	protected $_configuration_group;
@@ -29,7 +34,7 @@ class Kohana_Config_Yaml extends Kohana_Config_Reader {
 	 */
 	public function load($group, array $config = NULL)
 	{
-		if ($files = Kohana::find_file($this->_directory, $group, 'yaml', TRUE))
+		if ($files = Kohana::find_file($this->_directory, $group, 'yml', TRUE))
 		{
 			// Initialize the config array
 			$config = array();
@@ -37,7 +42,7 @@ class Kohana_Config_Yaml extends Kohana_Config_Reader {
 			foreach ($files as $file)
 			{
 				// Merge each file to the configuration array
-				$config = Arr::merge($config, yaml_parse_file($file));
+				$config = Arr::merge($config, YAML::instance()->parse_file($file));
 			}
 		}
 

@@ -1,6 +1,11 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 /**
  * Abstract YAML reader. YAML drivers must extend this class.
+ *
+ * @package    Kohana/YAML
+ * @author     Gabriel Evans <gabriel@codeconcoction.com>
+ * @copyright  (c) 2010 Gabriel Evans
+ * @license    http://www.opensource.org/licenses/mit-license.php  MIT License
  */
 abstract class Kohana_YAML {
 
@@ -9,10 +14,9 @@ abstract class Kohana_YAML {
 	 */
 	public static $instance;
 
-	/**
-	 * @var  string  driver name of currently used reader
-	 */
-	public static $driver;
+
+	// only instantiable by self
+	abstract protected function __construct();
 
 	/**
 	 * YAML reader singleton. If a driver isn't specified, will use YAML extension
@@ -26,13 +30,11 @@ abstract class Kohana_YAML {
 		{
 			if ( ! $driver)
 			{
-				self::$driver =  (extension_loaded('yaml')) ? 'pecl' : 'symfony';
+				$driver = (extension_loaded('yaml')) ? 'PECL' : 'Symfony';
 			}
-			else
-			{
-				self::$driver = $driver;
-			}
-			YAML::$instance = new YAML_.self::$driver;
+
+			$driver = 'YAML_'.$driver;
+			YAML::$instance = $driver;
 		}
 
 		return YAML::$instance;
@@ -43,26 +45,35 @@ abstract class Kohana_YAML {
 	 * @param   string  YAML string to be parsed
 	 * @return  array   parsed data
 	 */
-	abstract public function parse($data);
+	abstract public function parse($string);
 
 	/**
 	 * Parse a YAML file to an array.
 	 * @param   string  file to be read
 	 * @return  array   parsed data
 	 */
-	abstract public function parse_file($filename);
+	public function parse_file($filename)
+	{
+		$data = include $filename;
+		return $this->parse($data);
+	}
 
 	/**
 	 * Convert an array of data into YAML.
-	 * @param   array   data to be converted to YAML
+	 * @param   mixed   input data to be converted into YAML
 	 * @return  string  converted YAML
 	 */
-	abstract public function dump(array $data);
+	abstract public function dump($data);
 
 	/**
-	 * Dump an array of data to a YAML file.
-	 * @return
+	 * Dump an input data to a YAML file.
+	 * @param   string  filename to output to
+	 * @param   mixed   input data to parse and dump
+	 * @return  mixed   number of bytes written, or FALSE on failure
 	 */
-	abstract public function dump_file(array $data, $filename);
+	public function dump_file($filename, $data)
+	{
+		return file_put_contents($filename, $this->dump($data));
+	}
 
 }
