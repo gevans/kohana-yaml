@@ -1,6 +1,6 @@
-## Usage
+# Usage
 
-### Configuration
+## Configuration
 
 Place configuration files in your application's `config/` directory, using a `.yml` extension.
 
@@ -19,7 +19,7 @@ Place configuration files in your application's `config/` directory, using a `.y
 
 Using the above example, you can access `children` using `Kohana::config('inflector.irregular.child')`.
 
-### I18n
+## I18n
 
 Place langauge files in your application's `i18n/` directory, using a `.yml` extension:
 
@@ -27,18 +27,18 @@ Place langauge files in your application's `i18n/` directory, using a `.yml` ext
     Spanish: Español
     Hello, world!: ¡Hola, mundo!
 
-### General
+## General
 
 If you're using YAML for something other than I18n and configuration, you can use the YAML through `YAML::instance()` which
 will return an instantiated driver class of either Symfony or php-yaml, depending on whether php-yaml is available.
 
-### Parsing
+## Parsing
 
 `YAML::instance()->parse($data)` will parse YAML from a string and return it as an array.
 
 `YAML::instance()->parse_file($filename)` will parse YAML from a specified file and return it as an array.
 
-### Dumping
+## Dumping
 
 `YAML::instance()->dump($data)` will convert a string into YAML.
 
