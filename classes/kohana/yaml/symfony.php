@@ -10,16 +10,17 @@
  */
 class Kohana_YAML_Symfony extends YAML {
 
-	// Symfony YAML parser instance
+	// sfYamlParser instance
 	protected $_parser;
 
-	// Symfony YAML dumper instance
+	// sfYamlDumper instance
 	protected $_dumper;
 
-	// instantiates needed libraries
+	// loads needed libraries
 	protected function __construct()
 	{
-		include_once Kohana::find_file();
+		include Kohana::find_file('vendor', 'symfony-yaml/lib/sfYamlParser');
+		include Kohana::find_file('vendor', 'symfony-yaml/lib/sfYamlDumper');
 
 		$this->_parser = new sfYamlParser;
 		$this->_dumper = new sfYamlDumper;

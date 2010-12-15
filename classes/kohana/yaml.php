@@ -12,11 +12,11 @@ abstract class Kohana_YAML {
 	/**
 	 * @var  object  instance of YAML reader
 	 */
-	public static $instance;
+	public static $_instance;
 
 
 	// only instantiable by self
-	abstract protected function __construct();
+	protected function __construct() {}
 
 	/**
 	 * YAML reader singleton. If a driver isn't specified, will use YAML extension
@@ -26,15 +26,15 @@ abstract class Kohana_YAML {
 	 */
 	public static function instance()
 	{
-		if ( ! YAML::$instance)
+		if ( ! YAML::$_instance)
 		{
 			// determine best driver available
-			$driver = (extension_loaded('yaml')) ? 'PECL' : 'Symfony';
+			$driver = (extension_loaded('yaml')) ? 'YAML_PECL' : 'YAML_Symfony';
 
-			YAML::$instance = $driver;
+			YAML::$_instance = new $driver;
 		}
 
-		return YAML::$instance;
+		return YAML::$_instance;
 	}
 
 	/**
@@ -51,7 +51,10 @@ abstract class Kohana_YAML {
 	 */
 	public function parse_file($filename)
 	{
-		$data = Kohana::load($filename);
+		ob_start();
+		Kohana::load($filename);
+		$data = ob_get_clean();
+
 		return $this->parse($data);
 	}
 

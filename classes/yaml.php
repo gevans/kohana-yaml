@@ -1,3 +1,3 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class YAML extends Kohana_YAML {}
+abstract class YAML extends Kohana_YAML {}

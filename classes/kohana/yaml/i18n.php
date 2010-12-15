@@ -40,7 +40,7 @@ class Kohana_YAML_I18n extends Kohana_I18n {
 			// Create a path for this set of parts
 			$path = implode(DIRECTORY_SEPARATOR, $parts);
 
-			if ($files = Kohana::find_file('i18n', $path, NULL, TRUE))
+			if ($files = Kohana::find_file('i18n', $path, 'yml', TRUE))
 			{
 				$t = array();
 				foreach ($files as $file)
