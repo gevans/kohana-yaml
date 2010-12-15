@@ -1,37 +1,35 @@
-# Kohana 3.x YAML Config Driver
+# Kohana 3 YAML Module
 
-## Requirements & Installation
+This module provides an interface for working with YAML files, along with drivers for I18n and configuration support. You
+also have the option between using [Symfony YAML](http://components.symfony-project.org/yaml/) or
+[php-yaml](http://pecl.php.net/package/yaml) for parsing files.
 
-1. Install YAML PECL extension: [http://pecl.php.net/package/yaml](http://pecl.php.net/package/yaml)
-2. Download or clone this repository to your Kohana modules directory
-3. Enable the module in your `bootstrap.php` file
-4. Attach the YAML reader:
+## Installation
 
-<pre>
-Kohana::$config->attach(Config_YAML);
-</pre>
+Clone the repository (or add it as the submodule) to your modules directory:
 
-## Example YAML file
+    $ git clone git://github.com/gevans/kohana-yaml.git modules/yaml
 
-`application/config/example.yaml`
+Update & initiate submodules (to pull the latest Symfony YAML libraries):
 
-	some_key: some_value
-	another_key:
-	  bars: [ bar1, bar2, bar3 ]
-	  text: |
-		My text is line
-		wrapped!
-	items:
-	 - id: 1
-	   name: item 1
- 	 - id: 2
-	   name: item 2
+    $ cd modules/yaml
+    $ git submodule update --init
 
-## Example Usage
+Enable the module in your `bootstrap.php` and **optionally**, setup php-yaml.
 
-	Kohana::config('example.another_key.bars.1');		// => "bar2"
+### php-yaml
 
-or access to config as object:
+On Ubuntu 10.10, install needed packages to build the extension:
 
-	Kohana::config('example')->another_key['bars'][1];	// => "bar2"
+    $ aptitude install build-essential php5-dev libyaml-dev
 
+Then, use PECL to install the extension:
+
+    $ pecl install channel://pecl.php.net/yaml-0.6.3
+
+Next, you'll want to enable the extension by creating a file, `/etc/php5/conf.d/yaml.ini`:
+
+    ; configuration for php YAML module
+    extension=yaml.so
+
+Save the file, restart your web server, and you should be good to go!

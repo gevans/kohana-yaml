@@ -3,7 +3,6 @@
  * Extension of I18n class, supporting language files written in YAML:
  *
  *     # APPPATH/i18n/es.yml
- *     ---
  *     Spanish: Español
  *     Hello, world!: ¡Hola, mundo!
  *
