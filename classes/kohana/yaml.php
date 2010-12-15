@@ -51,7 +51,7 @@ abstract class Kohana_YAML {
 	 */
 	public function parse_file($filename)
 	{
-		$data = include $filename;
+		$data = Kohana::load($filename);
 		return $this->parse($data);
 	}
 

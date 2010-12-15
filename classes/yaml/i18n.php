@@ -1,3 +1,3 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class I18n extends YAML_I18n {}
+class YAML_I18n extends Kohana_YAML_I18n {}
