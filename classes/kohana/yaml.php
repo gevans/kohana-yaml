@@ -24,15 +24,22 @@ abstract class Kohana_YAML {
 	 * @param   string  driver to be used
 	 * @return  object  driver instance
 	 */
-	public static function instance()
+	public static function instance($driver = NULL)
 	{
 		if ( ! YAML::$_instance)
 		{
-			// determine best driver available
-			$driver = (extension_loaded('yaml')) ? 'YAML_PECL' : 'YAML_Symfony';
-
-			YAML::$_instance = new $driver;
+			if ( ! $driver)
+			{
+				// determine best driver available
+				$driver = (extension_loaded('yaml')) ? 'YAML_PECL' : 'YAML_Symfony';
+			}
+			else
+			{
+				$driver = 'YAML_'.ucfirst($driver);
+			}
 		}
+
+		YAML::$_instance = new $driver;
 
 		return YAML::$_instance;
 	}
