@@ -37,9 +37,10 @@ abstract class Kohana_YAML {
 			{
 				$driver = 'YAML_'.ucfirst($driver);
 			}
+
+			YAML::$_instance = new $driver;
 		}
 
-		YAML::$_instance = new $driver;
 
 		return YAML::$_instance;
 	}
