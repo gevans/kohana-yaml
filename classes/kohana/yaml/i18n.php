@@ -50,10 +50,32 @@ class Kohana_YAML_I18n extends Kohana_I18n {
 				$t = array();
 				foreach ($files as $file)
 				{
-					if (substr($file, -4) == '.yml')
+					if (substr($file, -4) === '.yml')
 					{
-						// Merge the YAML language strings into the sub table
-						$t = array_merge($t, YAML::instance()->parse_file($file));
+						if (Kohana::$caching === TRUE)
+						{
+							$cached_file = Kohana::cache($file);
+
+							if ( ! empty($cached_file))
+							{
+								// Merge the cached YAML language strings into the sub table
+								$t = array_merge($t, $cached_file);
+							}
+							else
+							{
+								// Cache the file
+								$cached_file = YAML::instance()->parse_file($file);
+								Kohana::cache($file, $cached_file);
+
+								// Merge the YAML language strings into the sub table
+								$t = array_merge($t, $cached_file);
+							}
+						}
+						else
+						{
+							// Merge the YAML language strings into the sub table
+							$t = array_merge($t, YAML::instance()->parse_file($file));
+						}
 					}
 					else
 					{

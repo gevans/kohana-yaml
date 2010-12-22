@@ -4,6 +4,7 @@
  * @package   Kohana/YAML
  * @category  Configuration
  * @author    Jan Stránský <jan.stransky@arnal.cz>
+ * @author    Gabriel Evans <gabriel@codeconcoction.com>
  */
 class Kohana_Config_YAML extends Kohana_Config_Reader {
 
@@ -41,8 +42,30 @@ class Kohana_Config_YAML extends Kohana_Config_Reader {
 
 			foreach ($files as $file)
 			{
-				// Merge each file to the configuration array
-				$config = Arr::merge($config, YAML::instance()->parse_file($file));
+				if (Kohana::$caching === TRUE)
+				{
+					$cached_file = Kohana::cache($file);
+
+					if ( ! empty($cached_file))
+					{
+						// Merge each cached file to the configuration array
+						$config = Arr::merge($config, $cached_file);
+					}
+					else
+					{
+						// Cache the file
+						$cached_file = YAML::instance()->parse_file($file);
+						Kohana::cache($file, $cached_file);
+
+						// Merge each file to the configuration array
+						$config = Arr::merge($config, $cached_file);
+					}
+				}
+				else
+				{
+					// Merge each file to the configuration array
+					$config = Arr::merge($config, YAML::instance()->parse_file($file));
+				}
 			}
 		}
 
