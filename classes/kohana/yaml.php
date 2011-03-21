@@ -54,14 +54,22 @@ abstract class Kohana_YAML {
 
 	/**
 	 * Parse a YAML file to an array.
-	 * @param   string  file to be read
-	 * @return  array   parsed data
+	 * @param   string   file to be read
+	 * @param   boolean  whether to evaulate PHP tags
+	 * @return  array    parsed data
 	 */
-	public function parse_file($filename)
+	public function parse_file($filename, $evaluate = FALSE)
 	{
-		ob_start();
-		Kohana::load($filename);
-		$data = ob_get_clean();
+		if ($evaluate)
+		{
+			ob_start();
+			Kohana::load($filename);
+			$data = ob_get_clean();
+		}
+		else
+		{
+			$data = file_get_contents($filename);
+		}
 
 		return $this->parse($data);
 	}
