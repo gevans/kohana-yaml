@@ -54,7 +54,7 @@ class Kohana_Config_YAML extends Config_Reader {
 					else
 					{
 						// Cache the file
-						$cached_file = YAML::instance()->parse_file($file);
+						$cached_file = YAML::instance()->parse_file($file, TRUE);
 						Kohana::cache($file, $cached_file);
 
 						// Merge each file to the configuration array
@@ -64,7 +64,7 @@ class Kohana_Config_YAML extends Config_Reader {
 				else
 				{
 					// Merge each file to the configuration array
-					$config = Arr::merge($config, YAML::instance()->parse_file($file));
+					$config = Arr::merge($config, YAML::instance()->parse_file($file, TRUE));
 				}
 			}
 		}
