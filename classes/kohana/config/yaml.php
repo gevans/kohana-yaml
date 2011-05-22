@@ -6,7 +6,7 @@
  * @author    Jan Stránský <jan.stransky@arnal.cz>
  * @author    Gabriel Evans <gabriel@codeconcoction.com>
  */
-class Kohana_Config_YAML extends Kohana_Config_Reader {
+class Kohana_Config_YAML extends Config_Reader {
 
 	// Configuration group name
 	protected $_configuration_group;
