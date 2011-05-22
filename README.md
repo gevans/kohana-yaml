@@ -46,12 +46,12 @@ I18n is just as easy as the last part was. Just save your `.yml` files in the
 `i18n/` while the module does that rest. For example:
 
     # i18n/es.yml
-    "Hola, :name!": Hello, :name!
-    I don't speak Spanish: Yo no hablo Español.
+    "Hola, :name!": "Hello, :name!"
+    Yo no hablo Español.: I don't speak Spanish.
     Wait. What?: Espere. ¿Qué?
 
-Using `__('Hola, :user!', array(':user' => 'World'), 'es')` would return
-`Hello, World!` Having fun yet?
+After that, using `__('Yo no hablo Español.')` returns `I don't speak Spanish.`
+Having fun yet?
 
 You can read [The Official YAML Web Site](http://www.yaml.org/) for more advanced syntax.
 
