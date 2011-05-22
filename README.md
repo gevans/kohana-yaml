@@ -1,4 +1,4 @@
-# Kohana 3 YAML Module
+# Kohana 3.x YAML Module
 
 YAML stands for YAML Ain't a Markup Language. Enjoy easy to understand syntax
 even your boss will be able to read and write! This module will let you write
