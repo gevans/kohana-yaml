@@ -24,7 +24,7 @@ Enable the module in your `bootstrap.php`:
 
 **Optionally**, you can compile php-yaml.
 
-## Usage
+## General Usage
 
 ### Configuration
 

@@ -1,15 +1,23 @@
 # Usage
 
-## General
+## Miscellaneous
 
-If you're using YAML for something other than I18n and configuration, you can use the YAML through `YAML::instance()` which
-will return an instantiated driver class of either Symfony or php-yaml, depending on whether php-yaml is available.
+If you're using YAML for something other than i18n and configuration, you can
+use the YAML through `YAML::instance()` which will return an instantiated driver
+class of either Symfony YAML or php-yaml, depending on whether php-yaml is
+available.
 
 ### Parsing
 
-`YAML::instance()->parse($data)` will parse YAML from a string and return it as an array.
+`YAML::instance()->parse($data)` will parse YAML from a string and return it as
+an array.
 
-`YAML::instance()->parse_file($filename)` will parse YAML from a specified file and return it as an array.
+`YAML::instance()->parse_file($filename)` will parse YAML from a specified file
+and return it as an array.
+
+By default, PHP tags will be ignored unless you add `TRUE` as an argument to
+`parse_file()`.
+
 
 ### Dumping
 
@@ -17,32 +25,6 @@ will return an instantiated driver class of either Symfony or php-yaml, dependin
 
 `YAML::instance()->dump_file($filename, $data)` will convert a string into YAML and save it to a specified file.
 
-## Configuration
-
-Place configuration files in your application's `config/` directory, using a `.yml` extension.
-
-    # APPPATH/config/inflector.yml
-    uncountable:
-     - access
-     - advice
-     - art
-     # ...
-
-    irregular:
-     child: children
-     clothes: clothing
-     man: men
-     # ...
-
-Using the above example, you can access `children` using `Kohana::config('inflector.irregular.child')`.
-
-## I18n
-
-Place langauge files in your application's `i18n/` directory, using a `.yml` extension:
-
-    # APPPATH/i18n/es.yml
-    Spanish: Español
-    Hello, world!: ¡Hola, mundo!
 
 ## Further Reading
 
