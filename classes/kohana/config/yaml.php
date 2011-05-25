@@ -8,10 +8,14 @@
  */
 class Kohana_Config_YAML extends Config_Reader {
 
-	// Configuration group name
+	/**
+	 * @var  string  Configuration group name
+	 */
 	protected $_configuration_group;
 
-	// Has the config group changed?
+	/**
+	 * @var  bool  Has the config group changed?
+	 */
 	protected $_configuration_modified = FALSE;
 
 	public function __construct($directory = 'config')
@@ -44,32 +48,26 @@ class Kohana_Config_YAML extends Config_Reader {
 			{
 				if (Kohana::$caching === TRUE)
 				{
-					$cached_file = Kohana::cache($file);
+					$yaml = Kohana::cache($file);
 
-					if ( ! empty($cached_file))
-					{
-						// Merge each cached file to the configuration array
-						$config = Arr::merge($config, $cached_file);
-					}
-					else
+					if (empty($yaml))
 					{
 						// Cache the file
-						$cached_file = YAML::instance()->parse_file($file, TRUE);
-						Kohana::cache($file, $cached_file);
-
-						// Merge each file to the configuration array
-						$config = Arr::merge($config, $cached_file);
+						$yaml = YAML::instance()->parse_file($file, TRUE);
+						Kohana::cache($file, $yaml);
 					}
 				}
 				else
 				{
-					// Merge each file to the configuration array
-					$config = Arr::merge($config, YAML::instance()->parse_file($file, TRUE));
+					$yaml = YAML::instance()->parse_file($file, TRUE);
 				}
+
+				// Merge each file to the configuration array
+				$config = Arr::merge($config, $yaml);
 			}
 		}
 
 		return parent::load($group, $config);
 	}
 
-} // End Kohana_Config_Yaml
+} // End Kohana_Config_YAML
