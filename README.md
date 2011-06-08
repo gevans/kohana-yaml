@@ -17,10 +17,13 @@ Update & initiate submodules (to get the latest Symfony YAML libraries):
 
 Enable the module in your `bootstrap.php`:
 
-    Kohana::modules(array(
-        'yaml'          => MODPATH.'yaml',       // YAML config & i18n reader
-        // ...
-    ));
+```php
+<?php
+Kohana::modules(array(
+    'yaml' => MODPATH.'yaml', // YAML config & i18n reader
+    // ...
+));
+```
 
 **Optionally**, you can compile php-yaml.
 
@@ -30,12 +33,14 @@ Enable the module in your `bootstrap.php`:
 
 You can write your config files in YAML like so:
 
-    # this is a comment
-    some_key: some_value
-    group:
-      # unfortunately, the \n is needed or PHP will mess up the line breaks:
-      dynamic_key: <?php echo "PHP!\n"; ?>
-      another_key: another_value
+```yaml
+# This is a comment
+some_key: some_value
+group:
+  # unfortunately, the \n is needed or PHP will mess up the line breaks:
+  dynamic_key: <?php echo "PHP!\n"; ?>
+  another_key: another_value
+```
 
 Save the files as `config/<filename>.yml` and Kohana will be able to read them as
 usual.
@@ -45,10 +50,12 @@ usual.
 I18n is just as easy as the last part was. Just save your `.yml` files in the
 `i18n/` while the module does that rest. For example:
 
-    # i18n/es.yml
-    "Hola, :name!": "Hello, :name!"
-    Yo no hablo Español.: I don't speak Spanish.
-    Wait. What?: Espere. ¿Qué?
+```yaml
+# i18n/es.yml
+"Hola, :name!": "Hello, :name!"
+Yo no hablo Español.: I don't speak Spanish.
+Wait. What?: Espere. ¿Qué?
+```
 
 After that, using `__('Yo no hablo Español.')` returns `I don't speak Spanish.`
 Having fun yet?
@@ -73,7 +80,9 @@ Then, use PECL to install the extension:
 You'll want to enable the extension in PHP. On Ubuntu, you can do so by creating
 a new file called `/etc/php5/conf.d/yaml.ini`:
 
-    ; configuration for php YAML module
-    extension=yaml.so
+```ini
+; configuration for php YAML module
+extension=yaml.so
+```
 
 Save the file, restart your web server, then you should be good to go!
