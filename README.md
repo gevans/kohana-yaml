@@ -37,8 +37,8 @@ You can write your config files in YAML like so:
 # This is a comment
 some_key: some_value
 group:
-  # unfortunately, the \n is needed or PHP will mess up the line breaks:
-  dynamic_key: <?php echo "PHP!\n"; ?>
+  # Don't forget the PHP_EOL or PHP will mess you *and* the line breaks up:
+  dynamic_key: <?= 'PHP!'.PHP_EOL ?>
   another_key: another_value
 ```
 
@@ -60,29 +60,54 @@ Wait. What?: Espere. ¿Qué?
 After that, using `__('Yo no hablo Español.')` returns `I don't speak Spanish.`
 Having fun yet?
 
-You can read [The Official YAML Web Site](http://www.yaml.org/) for more advanced syntax.
+You can read [The Official YAML Web Site](http://www.yaml.org/) for more
+advanced syntax.
 
-## Optionally, install php-yaml (Linux only)
+## Optionally, install YAML extension (*nix only)
 
-If you're on Linux, you can enjoy a increased speed in YAML parsing by compiling
-the php-yaml extension. Even if you don't do this, config files will still be
-cached when you enable caching in Kohana. To start, you need to install some
-dependencies.
+You can enjoy better performance and faster YAML parsing by installing the
+native [YAML](http://pecl.php.net/package/yaml) extension.
 
-On Ubuntu 10.10, install the needed packages to build the extension:
+### Ubuntu
 
-    $ aptitude install build-essential php5-dev libyaml-dev
+On Ubuntu, install some packages to build the extension:
+
+    $ sudo apt-get install build-essential php5-dev libyaml-dev
 
 Then, use PECL to install the extension:
 
-    $ pecl install channel://pecl.php.net/yaml-0.6.3
+    $ sudo pecl install channel://pecl.php.net/yaml-1.0.1
 
-You'll want to enable the extension in PHP. On Ubuntu, you can do so by creating
-a new file called `/etc/php5/conf.d/yaml.ini`:
+You'll need to enable the newly installed extension. On Ubuntu, you can do so by
+creating a new file called `/etc/php5/conf.d/yaml.ini` or adding to
+your `php.ini`:
 
 ```ini
-; configuration for php YAML module
+; configuration for YAML extension
 extension=yaml.so
 ```
 
-Save the file, restart your web server, then you should be good to go!
+Save the file, restart your web server, and you should be good to go!
+
+### Mac OSX
+
+Using Homebrew, you can install the YAML extension from
+_[@josegonzalez](https://github.com/josegonzalez)_'s
+[homebrew-php](https://github.com/josegonzalez/homebrew-php) repository:
+
+    $ brew install https://raw.github.com/josegonzalez/homebrew-php/master/Formula/yaml-php.rb
+    ######################################################################## 100.0%
+    ==> Downloading http://pecl.php.net/get/yaml-1.0.1.tgz
+    ==> phpize
+    ==> ./configure --prefix=/usr/local/Cellar/yaml-php/1.0.1
+    ==> make
+    ==> Caveats
+    To finish installing yaml-php:
+      * Add the following line to /usr/local/etc/php.ini:
+        extension="/usr/local/Cellar/yaml-php/1.0.1/yaml.so"
+      * Restart your webserver.
+      * Write a PHP page that calls "phpinfo();"
+      * Load it in a browser and look for the info on the yaml module.
+      * If you see it, you have been successful!
+    ==> Summary
+    /usr/local/Cellar/yaml-php/1.0.1: 4 files, 76K, built in 4 seconds
