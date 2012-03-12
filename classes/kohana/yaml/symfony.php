@@ -2,27 +2,36 @@
 /**
  * Symfony YAML driver. Parses and dumps YAML in native PHP (no extensions needed).
  *
- * @package    Kohana/YAML
+ * @package    YAML
  * @category   Drivers
  * @author     Gabriel Evans <gabriel@codeconcoction.com>
- * @copyright  (c) 2010 Gabriel Evans
+ * @copyright  (c) 2010-2012 Gabriel Evans
  * @license    http://www.opensource.org/licenses/mit-license.php  MIT License
  */
 class Kohana_YAML_Symfony extends YAML {
 
-	// sfYamlParser instance
+	/**
+	 * @var  sfYamlParser
+	 */
 	protected $_parser;
 
-	// sfYamlDumper instance
+	/**
+	 * @var  sfYamlDumper
+	 */
 	protected $_dumper;
 
-	// loads needed libraries
-	protected function __construct()
+	/**
+	 * Loads required Symfony YAML libraries.
+	 */
+	public function __construct()
 	{
-		include Kohana::find_file('vendor', 'symfony-yaml/lib/sfYamlParser');
-		include Kohana::find_file('vendor', 'symfony-yaml/lib/sfYamlDumper');
+		include_once Kohana::find_file('vendor', 'symfony-yaml/lib/sfYamlParser');
+		include_once Kohana::find_file('vendor', 'symfony-yaml/lib/sfYamlDumper');
 
+		// Instantiate and store parser
 		$this->_parser = new sfYamlParser;
+
+		// Instantiate and store dumper
 		$this->_dumper = new sfYamlDumper;
 	}
 

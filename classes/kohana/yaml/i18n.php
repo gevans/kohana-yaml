@@ -6,9 +6,9 @@
  *     Spanish: Español
  *     Hello, world!: ¡Hola, mundo!
  *
- * @package    Kohana/YAML
+ * @package    YAML
  * @author     Gabriel Evans <gabriel@codeconcoction.com>
- * @copyright  (c) 2010 Gabriel Evans
+ * @copyright  (c) 2010-2012 Gabriel Evans
  * @license    http://www.opensource.org/licenses/mit-license.php  MIT License
  */
 class Kohana_YAML_I18n extends Kohana_I18n {
