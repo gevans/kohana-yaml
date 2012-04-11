@@ -40,9 +40,9 @@ class Kohana_YAML_Symfony extends YAML {
 		return $this->_parser->parse($string);
 	}
 
-	public function dump($data)
+	public function dump($data, $inline = 0)
 	{
-		return $this->_dumper->dump($data);
+		return $this->_dumper->dump($data, $inline);
 	}
 
 }
