@@ -107,9 +107,9 @@ abstract class Kohana_YAML {
 	 * @param   mixed    $data      Input data
 	 * @return  boolean  `FALSE` on failure
 	 */
-	public function dump_file($filename, $data)
+	public function dump_file($filename, $data, $inline = 0)
 	{
-		return (boolean) file_put_contents($filename, $this->dump($data));
+		return (boolean) file_put_contents($filename, $this->dump($data, $inline));
 	}
 
 } // End YAML
