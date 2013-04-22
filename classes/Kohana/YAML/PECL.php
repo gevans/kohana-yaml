@@ -22,7 +22,7 @@ class Kohana_YAML_PECL extends YAML {
 		return yaml_emit($data, (Kohana::$charset == 'utf-8') ? YAML_UTF8_ENCODING : YAML_ANY_ENCODING);
 	}
 
-	public function dump_file($filename, $data)
+	public function dump_file($filename, $data, $inline = 0)
 	{
 		return yaml_emit_file($filename, $data, (Kohana::$charset == 'utf-8') ? YAML_UTF8_ENCODING : YAML_ANY_ENCODING);
 	}
